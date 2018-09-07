@@ -5,10 +5,7 @@ app = Flask(__name__)
 
 # Load the model
 MODEL = joblib.load('credit-rf-v1.0.pkl')
-MODEL_LABELS = ['RevolvingUtilizationOfUnsecuredLines', 'age', 'DebtRatio', 'MonthlyIncome',
-          'NumberOfOpenCreditLinesAndLoans', 'NumberOfTimes90DaysLate',
-          'NumberRealEstateLoansOrLines',
-          'NumberOfDependents']
+MODEL_LABELS = ['default', 'non-default']
 
 @app.route('/predict')
 def predict():
@@ -27,6 +24,7 @@ def predict():
                 MonthlyIncome, NumberOfOpenCreditLinesAndLoans,
                 NumberOfTimes90DaysLate, NumberRealEstateLoansOrLines,
                 NumberOfDependents]]
+
 
     # Use the model to predict the class
     label_index = MODEL.predict(features)
